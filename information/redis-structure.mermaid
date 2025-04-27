@@ -1,0 +1,15 @@
+graph TD
+    A[Redis Keys Structure] --> B[State Key]
+    A --> C[Translations Key]
+    
+    B --> D["word_bot:user:{chat_id}"]
+    D --> E[Value: IDLE/AWAITING_WORD_PAIR/TRAINING]
+    D --> F[TTL: 3600 seconds]
+    
+    C --> G["word_bot:user:{chat_id}:translations"]
+    G --> H[Value: List of possible translations]
+    G --> I[TTL: 3600 seconds]
+
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#333
+    style C fill:#bbf,stroke:#333

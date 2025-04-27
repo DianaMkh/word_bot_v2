@@ -1,0 +1,63 @@
+graph TD
+    subgraph Project Structure
+        M[main.py] --> |imports| D[database/]
+        M --> |imports| C[config.py]
+        M --> |imports| MSG[messages.py]
+        
+        D --> Models[models.py]
+        D --> DB[db.py]
+        
+        MSG --> |reads| J[bot_messages.json]
+    end
+
+    subgraph External Services
+        M --> |uses| R[(Redis)]
+        DB --> |connects| P[(PostgreSQL)]
+        M --> |uses| T[Telegram API]
+    end
+
+    subgraph Database Models
+        Models --> Users[Users Table]
+        Models --> Words[Words Table]
+    end
+
+    subgraph State Management
+        R --> |stores| S1[User States]
+        R --> |stores| S2[Training Translations]
+    end
+
+    subgraph User Flow
+        U[User] --> |interacts| T
+        T --> |sends updates| M
+        M --> |handles| States
+        M --> |reads/writes| Words
+    end
+
+    subgraph States
+        direction LR
+        None --> IDLE
+        IDLE --> AWAITING_WORD_PAIR
+        IDLE --> TRAINING
+        AWAITING_WORD_PAIR --> IDLE
+        TRAINING --> IDLE
+    end
+
+    style M fill:#2ecc71,stroke:#333,stroke-width:2px,color:#fff
+    style R fill:#3498db,stroke:#333,color:#fff
+    style P fill:#3498db,stroke:#333,color:#fff
+    style T fill:#9b59b6,stroke:#333,color:#fff
+    style D fill:#e74c3c,stroke:#333,color:#fff
+    style Models fill:#e67e22,stroke:#333,color:#fff
+    style DB fill:#e67e22,stroke:#333,color:#fff
+    style MSG fill:#1abc9c,stroke:#333,color:#fff
+    style C fill:#95a5a6,stroke:#333,color:#fff
+    style J fill:#95a5a6,stroke:#333,color:#fff
+    style Users fill:#f1c40f,stroke:#333
+    style Words fill:#f1c40f,stroke:#333
+    style S1 fill:#e8f8f5,stroke:#333
+    style S2 fill:#e8f8f5,stroke:#333
+    style U fill:#d5f5e3,stroke:#333
+    style States fill:#fdebd0,stroke:#333
+
+    classDef stateClass fill:#f39c12,stroke:#333,color:#fff
+    class IDLE,AWAITING_WORD_PAIR,TRAINING,None stateClass

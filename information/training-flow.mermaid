@@ -1,0 +1,47 @@
+sequenceDiagram
+    participant U as User
+    participant B as Bot Handlers
+    participant T as Training Functions
+    participant R as Redis State
+    participant DB as Database
+
+    Note over U,DB: Start Training Flow
+    U->>B: /train or "🎯 Train" button
+    B->>T: handle_train()
+    T->>DB: get_random_word()
+    
+    alt No words in DB
+        DB-->>T: None
+        T-->>B: (False, error_message)
+        B-->>U: "No words available..."
+    else Words exist
+        DB-->>T: random_word
+        T->>R: set_state(TRAINING)
+        T->>R: save translations
+        T-->>B: (True, word)
+        B-->>U: "Translate this word..."
+    end
+
+    Note over U,DB: Answer Processing Flow
+    U->>B: Answer text
+    B->>T: check_training_answer()
+    T->>R: get_translations()
+    
+    alt Session expired
+        R-->>T: None
+        T-->>B: (False, "Session expired")
+        B-->>U: "Session expired..."
+    else Session active
+        R-->>T: translations list
+        
+        alt Correct answer
+            T-->>B: (True, "Correct!")
+        else Wrong answer
+            T-->>B: (False, "Wrong! Correct is...")
+        end
+        
+        B->>T: handle_train() # Next word
+        T->>DB: get_random_word()
+        T->>R: update state and translations
+        B-->>U: New word for translation
+    end

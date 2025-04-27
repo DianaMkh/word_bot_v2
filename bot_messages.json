@@ -1,0 +1,57 @@
+{
+    "ru": {
+        "welcome": "Привет, *{name}*\\! Выбери действие из меню ниже\\.",
+        "main_menu": "Вы в главном меню",
+        "add_word": {
+            "prompt": "Пожалуйста, введите пару слов в формате \\(*слово1 \\- слово2*\\)",
+            "saved": "Пара слов сохранена\\! Используйте /add чтобы добавить ещё или /train для практики",
+            "exists": "Такая пара слов уже существует\\. Попробуйте другую пару или используйте /break для выхода",
+            "invalid_format": "Неверный формат: {error}\\. Используйте формат: слово1 \\- слово2"
+        },
+        "training": {
+            "clue": "Подсказка: \n\n━━━━━━━━━━━━━━━\n     *{word}*     \n━━━━━━━━━━━━━━━\n\nИспользуйте Back to menu для выхода ",
+            "word_prompt": "Переведите это слово:\n\n━━━━━━━━━━━━━━━\n     *{word}*     \n━━━━━━━━━━━━━━━\n\nИспользуйте 🔙 Back to menu для выхода",
+            "no_words": "Нет доступных слов для тренировки\\. Сначала добавьте несколько слов\\!",
+            "session_expired": "Сессия тренировки истекла\\. Используйте /train чтобы начать заново",
+            "correct": "*Правильно\\!* 🎉",
+            "other_translations": "*Правильно\\!* 🎉\nДругие возможные переводы: *{translations}*",
+            "wrong": "*Неверно\\!* Правильные переводы: *{translations}*\\. Следующее слово\\.\\.\\."
+        },
+        "errors": {
+            "use_menu": "Пожалуйста, используйте кнопки меню ниже",
+            "restart": "Что-то пошло не так\\. Возвращаемся в главное меню",
+            "clue_error": "Извините, подсказки поддерживаются только в тренировочном режиме.",
+            "language_doesnt_exist": "Указанный язык не поддерживается"
+        },
+        "wait_language": "Выберите новый язык",
+        "language_has_been_changed": "Язык изменен"
+    },
+    "en": {
+        "welcome": "Hello, *{name}*\\! Choose an action from the menu below\\.",
+        "main_menu": "You are in the main menu",
+        "add_word": {
+            "prompt": "Please enter word pair \\(*word1 \\- word2*\\)",
+            "saved": "Word pair saved\\! Use /add to add more or /train to practice",
+            "exists": "This word pair already exists\\. Try another pair or use /break to exit",
+            "invalid_format": "Invalid format: {error}\\. Please use: word1 \\- word2"
+        },
+        "training": {
+            "clue": "Attempt: \n\n━━━━━━━━━━━━━━━\n     *{word}*     \n━━━━━━━━━━━━━━━\n\nUse \uD83D\uDD19 Back to menu to quit",
+            "word_prompt": "Translate this word:\n\n━━━━━━━━━━━━━━━\n     *{word}*     \n━━━━━━━━━━━━━━━\n\nUse 🔙 Back to menu to quit",
+            "no_words": "No words available for training\\. Add some words first\\!",
+            "session_expired": "Training session expired\\. Please use /train to start again",
+            "correct": "*Correct\\!* 🎉",
+            "other_translations": "*Correct\\!* 🎉\nOther possible translations: *{translations}*",
+            "wrong": "*Wrong\\!* The correct translations are: *{translations}*\\. Starting next word\\.\\.\\."
+        },
+        "errors": {
+            "use_menu": "Please use menu buttons below",
+            "restart": "Something went wrong\\. Going back to main menu",
+            "clue_error": "Sorry, clue allow only in training mode.",
+            "language_doesnt_exist": "Provided language doesnt exist"
+
+        },
+        "wait_language": "Pick language to switch",
+        "language_has_been_changed": "language has been changed"
+    }
+}
