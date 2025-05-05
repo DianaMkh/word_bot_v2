@@ -93,3 +93,35 @@ Result: "word or few words - translation or few words"
 ---
 
 Copy this text and paste it into the `README.md` file of your project on GitHub.
+
+## Installation
+
+To run the chatbot locally, follow these steps:
+
+### 1. **Clone the repository:**
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+### 2. **(Optional) Create a virtual environment:**
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### 3. **Install the required dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. **Run the bot:**
+
+```bash
+python main.py
+```
+
+Make sure you have Python 3.7+ and SQLite3 installed.
