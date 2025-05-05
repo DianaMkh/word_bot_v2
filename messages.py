@@ -4,7 +4,7 @@ from typing import Any
 
 
 class Messages:
-    SUPPORTED_LANGUAGES = {'en', 'ru'}  # Добавляем список поддерживаемых языков
+    SUPPORTED_LANGUAGES = {'en', 'ru', 'uk'}  # Добавляем список поддерживаемых языков
 
     def __init__(self, language: str = 'en'):
         if language not in self.SUPPORTED_LANGUAGES:
