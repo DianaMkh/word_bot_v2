@@ -24,7 +24,11 @@
             "language_doesnt_exist": "Указанный язык не поддерживается"
         },
         "wait_language": "Выберите новый язык",
-        "language_has_been_changed": "Язык изменен"
+        "language_has_been_changed": "Язык изменен",
+        "translate" : {
+            "waiting_for_translate": "Введите слово для перевода",
+            "saving_for_training": "Новая пара слов добавлена для тренировки"
+        }
     },
     "en": {
         "welcome": "Hello, *{name}*\\! Choose an action from the menu below\\.",
@@ -52,7 +56,11 @@
 
         },
         "wait_language": "Pick language to switch",
-        "language_has_been_changed": "language has been changed"
+        "language_has_been_changed": "language has been changed",
+        "translate":{
+            "waiting_for_translate": "Enter a word to translate",
+            "saving_for_training": "A new word pair has been added for training"
+        }
     },
     "uk": {
         "welcome": "Привіт, *{name}*\\! Оберіть дію з меню нижче\\.",
@@ -79,6 +87,10 @@
             "language_doesnt_exist": "Зазначена мова не підтримується"
         },
         "wait_language": "Оберіть нову мову",
-        "language_has_been_changed": "Мову змінено"
+        "language_has_been_changed": "Мову змінено",
+        "translate":{
+            "waiting_for_translate": "Введіть слово для перекладу",
+            "saving_for_training": "Нову пару слів додано для тренування"
+        }
     }
 }
