@@ -12,6 +12,7 @@ from config import config
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, Message
 from messages import Messages
 from typing import Callable
+from app import translation
 
 
 class BotCommands(Enum):
@@ -22,6 +23,7 @@ class BotCommands(Enum):
     START = ('start', None)
     CLUE = ('clue', '➕ Clue')
     SWITCH_LANGUAGE = ('switch_language', 'Switch language')
+    TRANSLATE = ('translate', 'Translate')
 
     def __init__(self, command: str, button_text: Optional[str]) -> None:
         self.command = command
@@ -33,6 +35,7 @@ class UserState(Enum):
     AWAITING_WORD_PAIR = "awaiting_word_pair"
     TRAINING = "training"
     SWITCH_LANGUAGE = "switch_language"
+    TRANSLATE = "translate"
 
 
 class RedisStateManager:
@@ -101,7 +104,8 @@ def get_main_keyboard() -> ReplyKeyboardMarkup:
     add_button = KeyboardButton(BotCommands.ADD_WORD.button_text)
     train_button = KeyboardButton(BotCommands.TRAIN.button_text)
     switch_language_button = KeyboardButton(BotCommands.SWITCH_LANGUAGE.button_text)
-    keyboard.add(add_button, train_button, switch_language_button)
+    translate_button = KeyboardButton(BotCommands.TRANSLATE.button_text)
+    keyboard.add(add_button, train_button, switch_language_button, translate_button)
     return keyboard
 
 
@@ -408,6 +412,18 @@ def handle_clue(message) -> None:
     )
 
 
+@bot.message_handler(func=command_or_text(BotCommands.TRANSLATE))
+def handle_translate(message) -> None:
+    """Handle translate button click."""
+    state_manager.set_state(message.chat.id, UserState.TRANSLATE)
+    bot.reply_to(
+        message,
+        messages.get('translate.waiting_for_translate'),
+        parse_mode='MarkdownV2',
+        reply_markup=get_cancel_keyboard()
+    )
+
+
 @bot.message_handler(func=lambda message: True)
 def handle_message(message: Message) -> None:
     """Handle all other messages"""
@@ -481,6 +497,28 @@ def handle_message(message: Message) -> None:
                 parse_mode='MarkdownV2',
                 reply_markup=get_main_keyboard()
             )
+        case UserState.TRANSLATE:
+            user_input = message.text.strip().lower()
+            translated_word = translation(user_input)
+
+            bot.reply_to(
+                message,
+                escape_markdown(translated_word),
+                parse_mode='MarkdownV2'
+            )
+
+            user, _ = Users.get_or_create_user(telegram_id=message.chat.id)
+            word_pair, created = Words.get_or_create_word(user_input, translated_word, user.id)
+
+            bot.send_message(
+                message.chat.id,
+                messages.get('add_word.saved') if created else messages.get('add_word.exists'),
+                parse_mode='MarkdownV2',
+                reply_markup=get_main_keyboard()
+            )
+
+            state_manager.set_state(message.chat.id, UserState.IDLE)
+
 
 
 if __name__ == '__main__':
